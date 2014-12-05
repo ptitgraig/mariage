@@ -1,0 +1,81 @@
+.navbar-default {
+    background-color: #222;
+    border-color: transparent;
+    .navbar-brand {
+        padding:18px;
+        line-height: 21px;
+        color: $primary-color;
+    }
+    .navbar-collapse {
+        border-color: transparentize(white, .02);
+    }
+    .navbar-toggle {
+        border-color: $primary-color;
+        background-color: $primary-color;
+        padding-bottom: $root-font-size;
+        .icon-bar {
+            background-color: white;
+        }
+        .text {
+            display: block;
+            width: 100%;
+            position: absolute;
+            text-align: center;
+            bottom: 2px;
+            left: 0;
+            font-size: $root-font-size * .5;
+            color:white;
+        }
+        &:hover,
+        &:focus {
+            background-color: $primary-color;
+        }
+    }
+    .nav {
+        li {
+            a {
+                font-weight: 400;
+                letter-spacing: 1px;
+                color: white;
+                &:hover,
+                &:focus {
+                    color: $primary-color;
+                    outline: none;
+                }
+            }
+        }
+    }
+    .navbar-nav>.active>a {
+        border-radius: 0;
+        color: white;
+        background-color: $primary-color;
+    }
+    .navbar-nav>.active>a:hover,
+    .navbar-nav>.active>a:focus {
+        color: white;
+        background-color: darken($primary-color, 10%);
+    }
+}
+
+@media(min-width:768px) {
+    .navbar-default {
+        background-color: transparent;
+        padding: 25px 0;
+        transition: padding 0.3s;
+        border: none;
+        .navbar-brand {
+            font-size: $root-font-size * 2;
+            transition: all 0.3s;
+        }
+        .navbar-nav>.active>a {
+            border-radius: 3px;
+        }
+    }
+    .navbar-default.navbar-shrink {
+        background-color: $primary-color;
+        padding: 10px 0;
+        .navbar-brand {
+            font-size: 1.5em;
+        }    
+    }
+}

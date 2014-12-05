@@ -1,0 +1,75 @@
+body {
+    font: 300 $root-font-size $root-font-stack;
+    color: $text-color;
+}
+
+p {
+    font-size: $root-font-size * .95;
+    line-height: 1.5;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    outline: 0;
+}
+
+a {
+    color: #b3ddc4;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: #3c3316;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: uppercase;
+    font-family: Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    text-align: center;
+    color:lighten($text-color, 10%);
+}
+
+/*h2 {
+    text-shadow : 1px 1px 1px $secondary-color;
+}
+
+h3 {
+    text-shadow : 1px 1px 1px $tertiary-color;
+}
+
+h4 {
+    text-shadow : 1px 1px 1px $quaternary-color;
+}
+
+h5 {
+    text-shadow : 1px 1px 1px $quinary-color;
+}*/
+
+@media(min-width:768px) {
+    .pharmount {
+        font-family: "pharmount", Arial, sans-serif;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        text-align: left;
+    }
+    p {
+        font-size: $root-font-size;
+        line-height: 1.75;
+    }
+}

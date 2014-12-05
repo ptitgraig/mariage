@@ -1,0 +1,42 @@
+.team-member {
+    position: relative;
+    margin: 35px auto;
+    .img-responsive {
+        position: absolute;
+        top: -$team-img-size / 2;
+        z-index: 1;
+        width: $team-img-size;
+        height: $team-img-size;
+        background: url('../images/team.jpg') no-repeat 0 0;
+        border: 7px solid #fff;
+        & + h4 {
+            font-size: $root-font-size;
+        }
+        &.greg {
+            background-position-y : -$team-img-size;
+            & + h4 {
+                text-align: right;
+            }
+        }
+        &.anne {
+            right: 0;
+            & + h4 {
+                text-align: left;
+            }
+        }
+    }
+    h5 {
+        text-align: left;
+        padding-top: 10px;
+        margin: 0;
+    }
+    p {
+        margin:5px 0 15px 0;
+    }
+    .member-infos {
+        position: relative;
+        padding: 25px 10px;
+        background: $team-bg-color;
+        border-radius: 9px;
+    }
+}

@@ -1,0 +1,205 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+// components
+@import "_variables";
+@import "_typo";
+@import "_buttons";
+
+// sections
+@import "_scaffolding";
+@import "_header";
+@import "_ribbon";
+
+/* pour les chiffres dates */
+@font-face {
+    font-family: 'ecuyerdaxregular';
+    src: url('../fonts/ecuyerr-webfont.eot');
+    src: url('../fonts/ecuyerr-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ecuyerr-webfont.woff2') format('woff2'),
+         url('../fonts/ecuyerr-webfont.woff') format('woff'),
+         url('../fonts/ecuyerr-webfont.ttf') format('truetype'),
+         url('../fonts/ecuyerr-webfont.svg#ecuyerdaxregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "save-the-date";
+    src:url("../fonts/save-the-date.eot");
+    src:url("../fonts/save-the-date.eot?#iefix") format("embedded-opentype"),
+        url('../fonts/save-the-date.woff2') format('woff2'),
+        url("../fonts/save-the-date.woff") format("woff"),
+        url("../fonts/save-the-date.ttf") format("truetype"),
+        url("../fonts/save-the-date.svg#save-the-date") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'lavanderia_sturdysturdy';
+    src: url('../fonts/lavanderia_sturdy-webfont.eot');
+    src: url('../fonts/lavanderia_sturdy-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/lavanderia_sturdy-webfont.woff2') format('woff2'),
+         url('../fonts/lavanderia_sturdy-webfont.woff') format('woff'),
+         url('../fonts/lavanderia_sturdy-webfont.ttf') format('truetype'),
+         url('../fonts/lavanderia_sturdy-webfont.svg#lavanderia_sturdysturdy') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'mission_gothicbold';
+    src: url('../fonts/mission_gothic_bold-webfont.eot');
+    src: url('../fonts/mission_gothic_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/mission_gothic_bold-webfont.woff2') format('woff2'),
+         url('../fonts/mission_gothic_bold-webfont.woff') format('woff'),
+         url('../fonts/mission_gothic_bold-webfont.ttf') format('truetype'),
+         url('../fonts/mission_gothic_bold-webfont.svg#mission_gothicbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+[data-icon]:before {
+    font-family: "save-the-date" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: "save-the-date" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-like:before {
+    content: "a";
+}
+.icon-paperplane:before {
+    content: "b";
+}
+.icon-check-mark:before {
+    content: "c";
+}
+
+
+.elle {
+    color:$secondary-color;
+}
+.lui {
+    color:$quinary-color;   
+}
+header {
+    background-position: top center;
+    background-attachment: scroll;
+    background-color:#fff;
+    background-size:contain;
+}
+.intro-text {
+    padding-top: 20px;
+}
+.intro-heading {
+    font-size: $root-font-size * 2.56;
+    color:$tertiary-color;
+    margin-bottom: 15px;
+}
+.intro-lead-in {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.intro-text p {
+    padding: 10px;
+    font-size: $root-font-size / 1.1;
+    line-height: $root-font-size * 1.5;
+    background:#fff;
+    color:$text-color;
+    border-radius:3px;
+    big {
+        text-transform: uppercase;
+        font-size: 1.25em;
+        font-family: "Arial";
+        font-weight:700;
+        color:$primary-color;
+        text-shadow:1px 1px 1px $text-color;
+        i {
+            font-size: $root-font-size*2;
+        }
+    }
+}
+footer {
+    background-color:$text-color;
+    color:darken(#fff, 20%);
+    text-align:center;
+    font-size:$root-font-size / 1.2;
+    line-height:$root-font-size * 2;
+}
+.has-error {
+    position:relative;
+}
+.has-error .help-block {
+    display: block;
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    padding: 6px 12px 6px 12px;
+    border-radius: 2px;
+    background: $state-danger-text;
+    color: #fff;
+    font-weight: 700;
+}
+.inutile {
+    color:#fff;
+    border-radius:3px;
+}
+@media(min-width:768px) {
+    .elle, .lui {
+        font-family : "lavanderia_sturdysturdy";
+    }
+    header {
+        background-size:cover;
+    }
+    .intro-text {
+        padding-bottom:100px;
+        p {
+            font-size: $root-font-size * 1.8;
+            line-height: $root-font-size * 2.5;
+        }
+    }
+    .intro-lead-in {
+        font-size:$root-font-size * 2;
+        margin-bottom:40px;
+        margin-top:40px;
+    }
+    .intro-heading {
+        font-size:$root-font-size * 5;
+        font-family:'ecuyerdaxregular', sans-serif;
+        font-weight:500;
+        margin-bottom:40px;
+        margin-top:40px;
+    }
+    .form-control {
+        font-size:$root-font-size * 1.5;
+        height:$root-font-size * 4;
+        line-height:$root-font-size * 4;
+    }
+    .btn {
+        font-size: $root-font-size * 1.5;
+    }
+}
