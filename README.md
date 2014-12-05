@@ -1,4 +1,4 @@
-mariage
+Mariage
 =======
 
 Site de notre mariage optimisé pour mobile, avec un accent mis sur les performances.
