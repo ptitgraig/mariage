@@ -2,7 +2,6 @@ mariage
 =======
 
 Site de notre mariage optimisé pour mobile, avec un accent mis sur les performances.
-L'objectif est de resté en dessous des 200k pour la page principale du site et en dessous de 80k pour la page du save-the-date tout en restant visuellement attractif.
 
 Site visible sur www.mariage-greg-anne.fr et www.mariage-greg-anne.fr/save-the-date.html
 
