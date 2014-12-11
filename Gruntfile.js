@@ -84,7 +84,8 @@ module.exports = function (grunt) {
         open: true,
         livereload: 35729,
         // Change this to '0.0.0.0' to access the server from outside
-        hostname: 'localhost'
+        //hostname: 'localhost'
+        hostname: '10.53.180.9'
       },
       livereload: {
         options: {
@@ -288,7 +289,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= config.app %>/images',
-          src: '{,*/}*.{gif,jpeg,jpg,png}',
+          src: '{,*/}*.{gif,jpeg,jpg,png,webp}',
           dest: '<%= config.dist %>/images'
         }]
       }
@@ -299,31 +300,11 @@ module.exports = function (grunt) {
     //   files: {
     //     expand: true,
     //     cwd: '<%= config.app %>/images',
-    //     src: '{,*/}*.{gif,jpeg,jpg,png}',
+    //     src: '{,*/}*.{jpg,jpeg}',
     //     dest: '<%= config.dist %>/images'
     //   },
     //   options: {
-    //     binpath: require('webp-bin').path,
-    //     preset: 'photo',
-    //     verbose: true,
-    //     quality: 70,
-    //     alphaQuality: 80,
-    //     compressionMethod: 6,
-    //     segments: 4,
-    //     psnr: 42,
-    //     sns: 50,
-    //     filterStrength: 40,
-    //     filterSharpness: 3,
-    //     simpleFilter: true,
-    //     partitionLimit: 50,
-    //     analysisPass: 6,
-    //     multiThreading: true,
-    //     lowMemory: false,
-    //     alphaMethod: 0,
-    //     alphaFilter: 'best',
-    //     alphaCleanup: true,
-    //     noAlpha: false,
-    //     lossless: false
+    //     binpath: require('webp-bin').path
     //   }
     // },
 
@@ -382,11 +363,11 @@ module.exports = function (grunt) {
 
     uglify: {
       dist: {
-            files: [{
+        files: [{
           expand: true,
-          cwd: '.tmp/scripts/',
+          cwd: '<%= config.app %>/scripts/',
           src: '{,*/}*.js',
-          dest: '.tmp/scripts/'
+          dest: '<%= config.dist %>/scripts/'
         }]
         // files: {
         //   '../.tmp/scripts/save-the-date.js': [
@@ -428,6 +409,12 @@ module.exports = function (grunt) {
         },{
           expand: true,
           dot: true,
+          cwd: '.',
+          src: 'bower_components/html5shiv/dist/html5shiv-printshiv.min.js',
+          dest: '<%= config.dist %>'
+        },{
+          expand: true,
+          dot: true,
           cwd: '.tmp/scripts/',
           src: '{,*/}*.js',
           dest: '<%= config.dist %>/scripts/'
@@ -446,7 +433,15 @@ module.exports = function (grunt) {
         cwd: '<%= config.app %>/scripts',
         dest: '.tmp/scripts/',
         src: '{,*/}*.js'
-      }
+      },
+      // for IE debugging purpose, uncomment below
+      // scripts: {
+      //   expand: true,
+      //   dot: true,
+      //   cwd: '<%= config.app %>/scripts',
+      //   dest: '<%= config.dist %>/scripts/',
+      //   src: '{,*/}*.js'
+      // }
     },
 
     // Launch MAMP to execute PHP
@@ -463,7 +458,8 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'sass:server',
-        'copy:styles'
+        'copy:styles',
+        //'copy:scripts',
       ],
       test: [
         'copy:styles'
@@ -471,9 +467,9 @@ module.exports = function (grunt) {
       dist: [
         'sass',
         'copy:styles',
-        'copy:scripts',
-        'imagemin'
-        //'svgmin'
+        //'copy:scripts',
+        'imagemin',
+        'svgmin'
         //'webp'
       ]
     }

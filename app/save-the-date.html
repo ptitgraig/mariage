@@ -6,6 +6,7 @@
     <meta name="description" content="Réservez votre date pour le mariage de Grégory Pelletey et Anne Giammarinaro">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
@@ -14,6 +15,9 @@
     <!-- build:css(.tmp) styles/save-the-date.css -->
     <link rel="stylesheet" href="styles/save-the-date.css">
     <!-- endbuild -->
+    <!--[if lt IE 9]>
+        <script src="bower_components/html5shiv/dist/html5shiv-printshiv.min.js"></script>
+    <![endif]-->
 </head>
 <body id="page-top" class="index">
     <!--[if lt IE 10]>
@@ -25,14 +29,26 @@
         <section>
             <div class="container">
                 <div class="intro-text col-md-6 col-md-offset-3">
-                    <div class="ribbon">
-                        <span class="content">Notez dans vos agendas</span>
-                    </div>
-                    <div class="intro-lead-in"><span class="elle">Anne</span> <span class="pharmount">&amp;</span> <span class="lui">Greg</span> se marient</div>
-                    <div class="intro-heading">29.08.2015</div>
-                    <p class="text-center">Donnez nous un <big>gros</big> coup de <big><i class="icon icon-like"></i></big> ! Remplissez les infos ci-dessous :)</p>
+                    
+                    <span class="ornment">
+                        <!--[if gte IE 9]><!-->
+                            <img src="images/ornment.svg" />
+                        <!--<![endif]-->
+                        <!--[if lte IE 8]>
+                            <img src="images/ornment.png" />
+                        <![endif]-->
+                    </span>
+                    <span class="names">Anne & Greg se</span>
+                    <span class="married">marient</span>
+                    <span class="savethedate">reservez la date</span>
+                    <span class="location">Saint Remy De Provence</span>
+                    <span class="date">29.08.2015</span>
+                    <span class="ornement bottom"></span>
+                    
+                    <p class="text-center"><span>Donnez nous un gros coup de pouce !<br/> Remplissez les infos ci-dessous :)<br/>
+                    &Ccedil;a nous aidera à mieux nous organiser. Ces informations ne vous engagent à rien mais si vous le souhaitez, vous pouvez déjà nous dire si vous pensez être là ou pas.</span></p>
                 </div>
-                <div class="row">
+                <div class="row" id="top-form">
                     <div class="col-md-6 col-md-offset-3">
                         <form name="sentMessage" id="contactForm" class="save-the-date" novalidate>
                             <div class="form-group">
@@ -41,27 +57,27 @@
                             </div>
                             <div class="form-group">
                                 <input type="tel" class="form-control" placeholder="Votre numéro de téléphone *" id="phone" maxlength="10">
-                                <p class="help-block text-danger" style="display:none;">Drrring, y'a pas de téléphone ?</p>
+                                <p class="help-block text-danger" style="display:none;">Psst !! Files moi ton 06, wech.</p>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Votre adresse postale*" name="address" id="address" required></textarea>
+                                <textarea class="form-control" placeholder="Votre adresse postale*" name="address" id="address" required rows="4"></textarea>
                                 <p class="help-block text-danger" style="display:none;">Dites nous où vous vivez.</p>
                             </div>
                             <div class="form-group">
                                 <select class="form-control" id="kids">
                                     <option>Nombre d'enfants</option>
                                     <option value="0">0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>Je ne compte plus ...</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="Je ne compte plus">Je ne compte plus ...</option>
                                 </select>
-                                <p class="help-block text-danger" style="display:none;">C&cedil;a nous serait vraiment utile.</p>
+                                <p class="help-block text-danger" style="display:none;">&Ccedil;a nous serait vraiment utile.</p>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Laissez nous un petit message :)" id="message"></textarea>
+                                <textarea class="form-control" placeholder="Laissez nous un petit message :)" id="message" rows="4"></textarea>
                             </div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
@@ -87,9 +103,14 @@
         </div>
     </footer>
 
+    <!-- for grunt-uncss to process the has-error class -->
+    <i class="has-error hidden"><i class="help-block"></i></i>
+    <!-- end for grunt-uncss -->
+
     <!-- build:js({.tmp}) scripts/save-the-date.js -->
     <script src="scripts/save-the-date.js"></script>
     <!-- endbuild -->
+    
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

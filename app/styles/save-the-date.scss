@@ -25,7 +25,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
     font-family: "save-the-date";
     src:url("../fonts/save-the-date.eot");
@@ -37,7 +36,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'lavanderia_sturdysturdy';
     src: url('../fonts/lavanderia_sturdy-webfont.eot');
@@ -49,20 +47,29 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
-    font-family: 'mission_gothicbold';
-    src: url('../fonts/mission_gothic_bold-webfont.eot');
-    src: url('../fonts/mission_gothic_bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/mission_gothic_bold-webfont.woff2') format('woff2'),
-         url('../fonts/mission_gothic_bold-webfont.woff') format('woff'),
-         url('../fonts/mission_gothic_bold-webfont.ttf') format('truetype'),
-         url('../fonts/mission_gothic_bold-webfont.svg#mission_gothicbold') format('svg');
+    font-family: 'great_vibesregular';
+    src: url('../fonts/greatvibes-regular-webfont.eot');
+    src: url('../fonts/greatvibes-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/greatvibes-regular-webfont.woff2') format('woff2'),
+         url('../fonts/greatvibes-regular-webfont.woff') format('woff'),
+         url('../fonts/greatvibes-regular-webfont.ttf') format('truetype'),
+         url('../fonts/greatvibes-regular-webfont.svg#great_vibesregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'bebas_neueregular';
+    src: url('../fonts/bebasneue-webfont.eot');
+    src: url('../fonts/bebasneue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bebasneue-webfont.woff2') format('woff2'),
+         url('../fonts/bebasneue-webfont.woff') format('woff'),
+         url('../fonts/bebasneue-webfont.ttf') format('truetype'),
+         url('../fonts/bebasneue-webfont.svg#bebas_neueregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
 }
-
 [data-icon]:before {
     font-family: "save-the-date" !important;
     content: attr(data-icon);
@@ -75,7 +82,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
     font-family: "save-the-date" !important;
@@ -88,7 +94,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
 .icon-like:before {
     content: "a";
 }
@@ -98,13 +103,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .icon-check-mark:before {
     content: "c";
 }
-
-
-.elle {
-    color:$secondary-color;
-}
-.lui {
-    color:$quinary-color;   
+.ornment {
+    margin-top:95px;
+    display:block;
+    img {max-width:100%;}
 }
 header {
     background-position: top center;
@@ -114,6 +116,8 @@ header {
 }
 .intro-text {
     padding-top: 20px;
+    color:$text-color;
+    text-shadow:1px 1px 1px #fff;
 }
 .intro-heading {
     font-size: $root-font-size * 2.56;
@@ -125,19 +129,26 @@ header {
     margin-bottom: 15px;
 }
 .intro-text p {
+    background:#fff;
     padding: 10px;
     font-size: $root-font-size / 1.1;
     line-height: $root-font-size * 1.5;
-    background:#fff;
-    color:$text-color;
+    border:3px dashed #fff;
+    color:#fff;
     border-radius:3px;
+    span {
+        display:block;
+        background:$secondary-color;
+        color:$text-color;
+        text-align:left;
+        text-shadow:none;
+        padding:6px 12px;
+    }
     big {
         text-transform: uppercase;
         font-size: 1.25em;
         font-family: "Arial";
         font-weight:700;
-        color:$primary-color;
-        text-shadow:1px 1px 1px $text-color;
         i {
             font-size: $root-font-size*2;
         }
@@ -155,31 +166,139 @@ footer {
 }
 .has-error .help-block {
     display: block;
-    position: absolute;
-    top: 7px;
-    right: 15px;
     padding: 6px 12px 6px 12px;
     border-radius: 2px;
     background: $state-danger-text;
     color: #fff;
-    font-weight: 700;
+    font-weight: 300;
 }
 .inutile {
     color:#fff;
     border-radius:3px;
 }
+.names {
+    display: block;
+    margin-top:10px;
+    font-family : "great_vibesregular";
+    font-size: $root-font-size * 2;
+    border-bottom:4px solid #fff;
+}
+.married {
+    display: block;
+    text-transform:uppercase;
+    font-family : "bebas_neueregular";
+    font-size: $root-font-size * 5; 
+    letter-spacing:-1px;
+    line-height:.9em;
+}
+.savethedate {
+    display: block;
+    text-transform:uppercase;
+    font-size: $root-font-size * 1.125;
+    position: relative;
+    font-family: serif;
+    &:before, &:after {
+        position: absolute;
+        content :" ";
+        display: block;
+        border:1px solid $text-color;
+        width: 15px;
+        height: 15px;
+        border-radius:7px;
+        top:3px;
+    }
+    &:before {
+        left:25px;
+    }
+    &:after {
+        right:25px;
+    }
+}
+.location {
+    display: block;
+    font-family : "lavanderia_sturdysturdy";
+    font-size: $root-font-size * 1.5;
+    border-bottom:4px solid #fff;
+}
+.date {
+    display: block;
+    font-family : "ecuyerdaxregular";
+    font-size: $root-font-size * 1.75;
+    letter-spacing:3px;
+    position:relative;
+    display: inline-block;
+    
+}
 @media(min-width:768px) {
-    .elle, .lui {
+    .has-error .help-block {
+        position: absolute;
+        top: 7px;
+        right: 15px;
+        font-weight: 700;
+    }
+    .names {
+        display: block;
+        font-size: $root-font-size * 4;
+        border-bottom:4px solid #fff;
+    }
+    .married {
+        display: block;
+        text-transform:uppercase;
+        font-family : "bebas_neueregular";
+        font-size: $root-font-size * 10; 
+        letter-spacing:-1px;
+        line-height:.9em;
+    }
+    .savethedate {
+        font-size: $root-font-size * 2.25;
+        &:before, &:after {
+            border:2px solid #fff;
+            width: 30px;
+            height: 30px;
+            border-radius:15px;
+            top:5px;
+        }
+        &:before {
+            left:5px;
+        }
+        &:after {
+            right:5px;
+        }
+    }
+    .location {
+        display: block;
         font-family : "lavanderia_sturdysturdy";
+        font-size: $root-font-size * 3;
+        border-bottom:4px solid #fff;
+    }
+    .date {
+        display: block;
+        font-family : "ecuyerdaxregular";
+        font-size: $root-font-size * 3.5;
+        letter-spacing:3px;
+        position:relative;
+        color: #fff;
+        display: inline-block;
+        
     }
     header {
         background-size:cover;
+        background-attachment:fixed;
     }
     .intro-text {
         padding-bottom:100px;
+        color:#fff;
+        text-shadow:none;
+    }
+    .text-center {
+        padding-top:100px;
+    }
+    .intro-text {
+        text-shadow:1px 1px 1px $text-color;;
         p {
-            font-size: $root-font-size * 1.8;
-            line-height: $root-font-size * 2.5;
+            margin-top:100px;
+            font-size: $root-font-size * 1.1;
+            line-height: $root-font-size * 1.5;
         }
     }
     .intro-lead-in {

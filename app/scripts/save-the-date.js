@@ -11,16 +11,28 @@ var isDev = document.location.href.split('localhost').length > 1,
     errors = [];
     
 
-$btn.addEventListener('click', submitForm);
-$btn.addEventListener('touchstart', submitForm);
+function addEvent(evnt, elem, func) {
+    if (elem.addEventListener)  {
+        elem.addEventListener(evnt,func,false);
+    }
+    else if (elem.attachEvent) {
+        elem.attachEvent("on"+evnt, func);
+    }
+    else {
+        elem[evnt] = func;
+    }
+}
 
-$btnError.addEventListener('click', submitForm);
-$btnError.addEventListener('touchstart', submitForm);
+addEvent('click', $btn, submitForm);
+addEvent('touchstart', $btn, submitForm);
 
-$name.addEventListener('focus', removeErrorMsg);
-$phone.addEventListener('focus', removeErrorMsg);
-$address.addEventListener('focus', removeErrorMsg);
-$kids.addEventListener('focus', removeErrorMsg);
+addEvent('click', $btnError, submitForm);
+addEvent('touchstart',$btnError, submitForm);
+
+addEvent('focus',$name, function(){removeErrorMsg($name)});
+addEvent('focus',$phone, function(){removeErrorMsg($phone)});
+addEvent('focus',$address, function(){removeErrorMsg($address)});
+addEvent('focus',$kids, function(){removeErrorMsg($kids)});
 
 function submitForm(){
     var url = (isDev ? 'http://localhost:8888/mariage/mail/save-the-date.php' : 'mail/save-the-date.php');
@@ -29,14 +41,15 @@ function submitForm(){
     $address.value === '' ? addError($address) : removeError($address);
     $kids.value === '' ? addError($kids) : removeError($kids);
     
-    if (errors.length > 0) return;
+    if (errors.length > 0) {
+        location.hash = "#top-form" ;
+        return;
+    }
 
     $btn.style.display = 'none';
     $btnSent.style.display = 'none';
     $btnError.style.display = 'none';
     $btnSending.style.display = 'block';
-    // $btn.className = 'btn btn-xl btn-sending';
-    // $btn.innerHTML = 'Envoi en cours <i class="icon icon-paperplane"></i>';
     
     url += '?name=' + $name.value;
     url += '&phone=' + $phone.value;
@@ -45,15 +58,19 @@ function submitForm(){
     url += '&message=' + $message.value;
     // url = "http://localhost:8888/mariage/mail/save-the-date.php";
     load(url, function(xhr) {
-        var res = JSON.parse(xhr.response);
+        var res;
+        if (xhr.responseText) {
+            res = xhr.responseText;
+        } else {
+            res = xhr.response;
+        }
         if (res.status === 'ko') {
             window.setTimeout(function() {
                 $btn.style.display = 'none';
                 $btnSent.style.display = 'none';
                 $btnError.style.display = 'block';
                 $btnSending.style.display = 'none';
-                // $btn.className = 'btn btn-xl btn-danger';
-                // $btn.innerHTML = 'Oops, une erreur. Ré-essayez.';
+                $btnError.innerHTML = res.message;
             }, 2500);    
         } else {
             window.setTimeout(function() {
@@ -61,25 +78,28 @@ function submitForm(){
                 $btnSent.style.display = 'block';
                 $btnError.style.display = 'none';
                 $btnSending.style.display = 'none';
-                // $btn.className = 'btn btn-xl btn-sent';
-                // $btn.innerHTML = 'Message envoyé. <i class="icon icon-check-mark"></i>';
             }, 2500);
         }
     });
 }
-
+function nextElementSibling(el) {
+    do { el = el.nextSibling } while ( el && el.nodeType !== 1 );
+    return el;
+}
 function addError(elt) {
-    elt.nextElementSibling.style.display = 'block';
+    var elNext = elt.nextElementSibling || nextElementSibling(elt);
+    elNext.style.display = 'block';
     elt.parentNode.className = 'form-group has-error';
     errors.push('1');
 }
 function removeError(elt) {
-    elt.nextElementSibling.style.display = 'none';
+    var elNext = elt.nextElementSibling || nextElementSibling(elt);
+    elNext.style.display = 'none';
     elt.parentNode.className = 'form-group';
     errors.pop();
 }
 function removeErrorMsg(elt) {
-    removeError(elt.currentTarget);
+    removeError(elt);
 }
 function load(url, callback) {
     var xhr;
