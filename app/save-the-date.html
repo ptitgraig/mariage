@@ -43,10 +43,9 @@
                     <span class="savethedate">reservez la date</span>
                     <span class="location">Saint Remy De Provence</span>
                     <span class="date">29.08.2015</span>
-                    <span class="ornement bottom"></span>
                     
                     <p class="text-center"><span>Donnez nous un gros coup de pouce !<br/> Remplissez les infos ci-dessous :)<br/>
-                    &Ccedil;a nous aidera à mieux nous organiser. Ces informations ne vous engagent à rien mais si vous le souhaitez, vous pouvez déjà nous dire si vous pensez être là ou pas.</span></p>
+                    &Ccedil;a nous aidera à mieux nous organiser. Ces informations ne vous engagent à rien; mais si vous le souhaitez, vous pouvez déjà nous dire si vous pensez être là ou pas.</span></p>
                 </div>
                 <div class="row" id="top-form">
                     <div class="col-md-6 col-md-offset-3">
@@ -64,15 +63,21 @@
                                 <p class="help-block text-danger" style="display:none;">Dites nous où vous vivez.</p>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" id="kids">
-                                    <option>Nombre d'enfants</option>
-                                    <option value="0">0</option>
+                                <select name="kids" id="kids" class="form-control">
+                                    <option value="with">Si je viens, je viens avec mes enfants</option>
+                                    <option value="without">Je viendrais sans enfants</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="kids-number" class="form-control" id="kidsNumber">
+                                    <option value="-1">Nombre d'enfants de plus de 13 ans</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                    <option value="Je ne compte plus">Je ne compte plus ...</option>
+                                    <option value="6">6</option>
+                                    <option value="gt6">Je ne compte plus :)</option>
                                 </select>
                                 <p class="help-block text-danger" style="display:none;">&Ccedil;a nous serait vraiment utile.</p>
                             </div>

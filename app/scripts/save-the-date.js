@@ -7,6 +7,7 @@ var isDev = document.location.href.split('localhost').length > 1,
     $phone = document.getElementById('phone'),
     $address = document.getElementById('address'),
     $kids = document.getElementById('kids'),
+    $kidsNumber = document.getElementById('kidsNumber'),
     $message = document.getElementById('message'),
     errors = [];
     
@@ -14,11 +15,9 @@ var isDev = document.location.href.split('localhost').length > 1,
 function addEvent(evnt, elem, func) {
     if (elem.addEventListener)  {
         elem.addEventListener(evnt,func,false);
-    }
-    else if (elem.attachEvent) {
+    } else if (elem.attachEvent) {
         elem.attachEvent("on"+evnt, func);
-    }
-    else {
+    } else {
         elem[evnt] = func;
     }
 }
@@ -29,17 +28,22 @@ addEvent('touchstart', $btn, submitForm);
 addEvent('click', $btnError, submitForm);
 addEvent('touchstart',$btnError, submitForm);
 
-addEvent('focus',$name, function(){removeErrorMsg($name)});
-addEvent('focus',$phone, function(){removeErrorMsg($phone)});
-addEvent('focus',$address, function(){removeErrorMsg($address)});
-addEvent('focus',$kids, function(){removeErrorMsg($kids)});
+addEvent('change',$kids, toggleKidsNumber);
+
+addEvent('focus',$name, function(){removeError($name)});
+addEvent('focus',$phone, function(){removeError($phone)});
+addEvent('focus',$address, function(){removeError($address)});
+addEvent('focus',$kids, function(){removeError($kids)});
+addEvent('focus',$kidsNumber, function(){removeError($kidsNumber)});
 
 function submitForm(){
     var url = (isDev ? 'http://localhost:8888/mariage/mail/save-the-date.php' : 'mail/save-the-date.php');
     $name.value === '' ? addError($name) : removeError($name);
     $phone.value === '' ? addError($phone) : removeError($phone);
     $address.value === '' ? addError($address) : removeError($address);
-    $kids.value === '' ? addError($kids) : removeError($kids);
+    if ($kids.value === 'with') {
+        $kidsNumber.value === '-1' ? addError($kidsNumber) : removeError($kidsNumber);
+    }
     
     if (errors.length > 0) {
         location.hash = "#top-form" ;
@@ -55,8 +59,10 @@ function submitForm(){
     url += '&phone=' + $phone.value;
     url += '&address=' + $address.value;
     url += '&kids=' + $kids.value;
-    url += '&message=' + $message.value;
-    // url = "http://localhost:8888/mariage/mail/save-the-date.php";
+    if ($message.value !== '') { url += '&message=' + $message.value; }
+    if ($kids.value === 'with') { url += '&kidsNumber=' + $kidsNumber.value; }
+    
+    //url = "http://localhost:8888/mariage/mail/save-the-date.php";
     load(url, function(xhr) {
         var res;
         if (xhr.responseText) {
@@ -64,23 +70,32 @@ function submitForm(){
         } else {
             res = xhr.response;
         }
-        if (res.status === 'ko') {
+        resJSON = JSON.parse(res);
+        if (resJSON.status === 'ko') {
             window.setTimeout(function() {
                 $btn.style.display = 'none';
                 $btnSent.style.display = 'none';
                 $btnError.style.display = 'block';
                 $btnSending.style.display = 'none';
-                $btnError.innerHTML = res.message;
-            }, 2500);    
+                $btnError.innerHTML = resJSON.message;
+            }, 2000);    
         } else {
             window.setTimeout(function() {
                 $btn.style.display = 'none';
                 $btnSent.style.display = 'block';
                 $btnError.style.display = 'none';
                 $btnSending.style.display = 'none';
-            }, 2500);
+            }, 2000);
         }
     });
+}
+function toggleKidsNumber() {
+    removeError($kidsNumber);
+    if ($kids.value === 'without') {
+        $kidsNumber.style.display = 'none';
+    } else {
+        $kidsNumber.style.display = 'block';
+    }
 }
 function nextElementSibling(el) {
     do { el = el.nextSibling } while ( el && el.nodeType !== 1 );
@@ -94,12 +109,10 @@ function addError(elt) {
 }
 function removeError(elt) {
     var elNext = elt.nextElementSibling || nextElementSibling(elt);
+    if (elNext === null) return;
     elNext.style.display = 'none';
     elt.parentNode.className = 'form-group';
     errors.pop();
-}
-function removeErrorMsg(elt) {
-    removeError(elt);
 }
 function load(url, callback) {
     var xhr;
@@ -122,7 +135,6 @@ function load(url, callback) {
     function ensureReadiness() {
         if(xhr.readyState < 4) { return; }
         if(xhr.status !== 200) { return; }
-        // all is well
         if(xhr.readyState === 4) { callback(xhr); }           
     }
     xhr.open('GET', url, true);

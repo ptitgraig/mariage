@@ -1,26 +1,40 @@
-<?php 
+<?php
 // header("Access-Control-Allow-Origin: *");
 
 // Check for empty fields
-if(empty($_GET['name'])   ||
-   empty($_GET['phone'])  ||
-   empty($_GET['kids'])   ||
-   empty($_GET['address'])) {
-	  echo json_encode(array('status' => 'ko','message'=> 'Missing parameters.'));
+if(empty($_GET['name'])     ||
+   empty($_GET['phone'])    ||
+   empty($_GET['address'])  ||
+   ($_GET['kids'] == 'with' && $_GET['kidsNumber'] == '-1')) {
+	  echo json_encode(array('status' => 'ko','message'=> 'Paramètres manquants.'));
 	  return false;
    }
-	
+
+$kidsWord = 'enfant';
+$pluriel = '';
+$kidsStr = '';
+$out = '';
+$res = false;
+
 $name = $_GET['name'];
 $phone = $_GET['phone'];
-$kids = $_GET['kids'];
 $address = $_GET['address'];
 $message = $_GET['message'];
 
-$out = '';
-$res = false;
-$kidsStr = 'enfant';
-if ($kids > 1) {
-    $kidsStr = 'enfants';
+$kids = ($_GET['kids'] == 'with') ? 'avec' : 'sans';
+if ($kids == 'avec') {
+    $kidsNumber = $_GET['kidsNumber'];
+    if ($kidsNumber > 1) {
+        $pluriel = 's';
+    }
+    $kidsStr =  'avec '.$kidsNumber.$kidsWord.$pluriel;
+    if ($kidsNumber == 'gt6') {
+        $kidsStr =  'avec plus de 6 enfants';
+        $kidsNumber = 'plus de 6';
+    }
+} else {
+    $kidsNumber = '0';
+    $kidsStr =  'sans enfant';
 }
 
 // Create the email and send the message
@@ -31,9 +45,10 @@ $email_body = "
    <p>Ses informations de contact :<br/>
     $phone<br/>
     $address<br/>
-    $kids $kidsStr<br/>
+    $name viendra $kidsStr<br/>
     $message<br/>
-</p>
+    <br/>
+   </p>
    <p>Ces informations ont été automatiquement enregistrées dans un fichier excel.<br/>
    <a href='http://www.mariage-greg-anne.fr/save_the_date.csv'>Cliquez ici pour le consulter</a></p>";
 
@@ -44,15 +59,15 @@ $headers .='Content-Transfer-Encoding: 8bit';
 
 if (mail( $to , $subject, nl2br($email_body), $headers)) {
     $fp = fopen('../save_the_date.csv', 'a');
-    $data = $name.";".$phone.";".$address.";".$kids.";".$message."\n";
+    $data = $name.";".$phone.";".$address.";".$kidsNumber.";".$message."\n";
     $writeOK = fwrite($fp, $data);
     fclose($fp);
     if ($writeOK) {
-        echo json_encode(array('status' => 'ok','message'=> 'Data written in file and mail sent.'));
+        echo json_encode(array('status' => 'ok','message'=> 'Données écrites et mail envoyé.'));
     } else {
-        echo json_encode(array('status' => 'ko','message'=> 'Data not written in file and mail sent.'));
+        echo json_encode(array('status' => 'ko','message'=> 'Données écrites mais mail non envoyé.'));
     }
 } else {
-    echo json_encode(array('status' => 'ko','message'=> 'Unable to send mail.'));
+    echo json_encode(array('status' => 'ko','message'=> 'Mail non envoyé.'));
 }
 ?>
